@@ -1,20 +1,59 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  HttpStatus,
+  Res,
+} from '@nestjs/common';
+
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto';
-import { LoginDto } from './dto/login.dto';
+import { AuthDto, LoginDto } from './dto';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('signup')
-  signup(@Body() dto: AuthDto) {
-    return this.authService.signup(dto);
+  async signup(
+    @Body() dto: AuthDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const jwtToken = await this.authService.signup(dto);
+
+    response.cookie('access_token', jwtToken.access_token, {
+      httpOnly: true,
+      domain: 'localhost',
+      maxAge: 1800000,
+    });
+
+    return jwtToken;
   }
 
   @HttpCode(HttpStatus.OK)
   @Post('signin')
-  signin(@Body() dto: LoginDto) {
-    return this.authService.signin(dto);
+  async signin(
+    @Body() dto: LoginDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const jwtToken = await this.authService.signin(dto);
+
+    response.cookie('access_token', jwtToken.access_token, {
+      httpOnly: true,
+      domain: 'localhost',
+      maxAge: 1800000,
+    });
+
+    return jwtToken;
+  }
+
+  @Post('logout')
+  async signout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('access_token', {
+      domain: 'localhost',
+      path: '/',
+    });
+    return { message: 'Success' };
   }
 }

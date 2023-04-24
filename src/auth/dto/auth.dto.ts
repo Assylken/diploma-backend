@@ -7,7 +7,30 @@ export class AuthDto {
   username: string;
   @IsEmail()
   @IsNotEmpty()
+  @Transform((param) => param.value.toLowerCase())
   email: string;
+  @IsNotEmpty()
+  isArtist: boolean;
+  @IsNotEmpty()
+  countryId: number;
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+}
+
+export class LoginDto {
+  @IsNotEmpty()
+  usernameOrEmail: string;
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+}
+
+export class ResetPasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  token: string;
+
   @IsString()
   @IsNotEmpty()
   password: string;
