@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class AuthDto {
   @IsNotEmpty()
@@ -9,7 +9,7 @@ export class AuthDto {
   @IsNotEmpty()
   @Transform((param) => param.value.toLowerCase())
   email: string;
-  @IsNotEmpty()
+  @IsOptional()
   isArtist: boolean;
   @IsNotEmpty()
   countryId: number;

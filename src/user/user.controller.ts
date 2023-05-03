@@ -4,7 +4,9 @@ import {
   Controller,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
+  Put,
   Res,
   UploadedFile,
   UseGuards,
@@ -21,7 +23,7 @@ import { Response } from 'express';
 
 export const storage = {
   storage: diskStorage({
-    destination: './uploads',
+    destination: './uploads/profileImages',
     filename: (req, file, cb) => {
       const name = file.originalname.split('.')[0];
       const fileExtension = file.originalname.split('.')[1];
@@ -53,6 +55,11 @@ export class UserController {
     return this.userService.editUser(userId, dto);
   }
 
+  @Get(':id')
+  getUsername(@Param('id') id) {
+    return this.userService.getUsername(+id);
+  }
+
   @UseGuards(JwtGuard)
   @Patch('upload')
   @UseInterceptors(FileInterceptor('profileImage', storage))
@@ -72,6 +79,6 @@ export class UserController {
 
   @Get('images/:filename')
   async getImage(@Param('filename') filename, @Res() res: Response) {
-    res.sendFile(filename, { root: 'uploads' });
+    res.sendFile(filename, { root: 'uploads/profileImages' });
   }
 }

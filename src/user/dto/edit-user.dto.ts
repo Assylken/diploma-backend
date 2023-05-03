@@ -1,9 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class EditUserDto {
-  @IsOptional()
-  @IsNotEmpty()
-  username?: string;
   @IsString()
   @IsOptional()
   firstName?: string;
@@ -12,8 +9,15 @@ export class EditUserDto {
   lastName?: string;
   @IsString()
   @IsOptional()
+  username?: string;
+  @IsString()
+  @IsOptional()
   bio?: string;
+  @IsString()
+  @IsOptional()
+  countryId?: number;
 }
+
 export class EditUserImageDto {
   @IsString()
   @IsOptional()

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Res } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { EditUserDto, EditUserImageDto } from './dto';
 
@@ -11,12 +11,17 @@ export class UserService {
         id: userId,
       },
       data: {
-        ...dto,
+        username: dto.username,
+        firstName: dto.firstName,
+        lastName: dto.lastName,
+        bio: dto.bio,
+        countryId: Number(dto.countryId),
       },
     });
     delete user.hash;
     return user;
   }
+
   async editImage(userId: number, file: string) {
     console.log(userId);
 
@@ -30,6 +35,16 @@ export class UserService {
       },
     });
     delete user.hash;
+    return user;
+  }
+
+  getUsername(id: number) {
+    const user = this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
     return user;
   }
 }

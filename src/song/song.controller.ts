@@ -11,7 +11,11 @@ import { SongService } from './song.service';
 import { GetUser } from 'src/auth/decorator';
 import { JwtGuard } from 'src/auth/guard';
 import { UploadSongDto } from './dto';
-import { AnyFilesInterceptor } from '@nestjs/platform-express';
+import {
+  AnyFilesInterceptor,
+  FileInterceptor,
+  FilesInterceptor,
+} from '@nestjs/platform-express';
 import { ipfs_client } from 'utils/ipfs';
 import { globSource } from 'ipfs-http-client';
 import { diskStorage } from 'multer';
@@ -45,14 +49,12 @@ export class SongController {
   constructor(private songService: SongService) {}
   @UseGuards(JwtGuard)
   @Post('upload-song')
-  @UseInterceptors(AnyFilesInterceptor())
+  @UseInterceptors(FilesInterceptor('files'))
   async uploadSong(
     @GetUser('id') userId: number,
     @Body() dto: UploadSongDto,
-    @UploadedFiles() files: Array<Express.Multer.File>,
+    @UploadedFiles() files,
   ) {
-    console.log('HSAF');
-
     return this.songService.uploadSong(userId, dto, files);
   }
 

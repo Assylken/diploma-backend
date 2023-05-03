@@ -4,6 +4,9 @@ import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { SongModule } from './song/song.module';
+import { GenreModule } from './genre/genre.module';
+import { CountryModule } from './country/country.module';
+import { PlaylistModule } from './playlist/playlist.module';
 
 @Module({
   imports: [
@@ -11,7 +14,10 @@ import { SongModule } from './song/song.module';
     AuthModule,
     UserModule,
     SongModule,
+    GenreModule,
+    CountryModule,
     PrismaModule,
+    PlaylistModule,
   ],
 })
 export class AppModule {}

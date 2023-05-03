@@ -25,7 +25,7 @@ export class AuthController {
     response.cookie('access_token', jwtToken.access_token, {
       httpOnly: true,
       domain: 'localhost',
-      maxAge: 1800000,
+      maxAge: 3600000,
     });
 
     return jwtToken;
@@ -42,7 +42,7 @@ export class AuthController {
     response.cookie('access_token', jwtToken.access_token, {
       httpOnly: true,
       domain: 'localhost',
-      maxAge: 1800000,
+      maxAge: 3600000,
     });
 
     return jwtToken;
