@@ -81,7 +81,7 @@ export class UserController {
     } else {
       return this.userService.editImage(
         userId,
-        `http://localhost:3333/users/images/${file.filename}`,
+        `https://muze-backend.onrender.com/users/images/${file.filename}`,
       );
     }
   }

@@ -50,7 +50,8 @@ export class PlaylistController {
   ) {
     var sendFile = '';
     if (file == null) sendFile = 'null';
-    else sendFile = `http://localhost:3333/playlist/images/${file.filename}`;
+    else
+      sendFile = `https://muze-backend.onrender.com/playlist/images/${file.filename}`;
     if (!file && file != null) {
       throw new BadRequestException('File is not an image');
     } else {
