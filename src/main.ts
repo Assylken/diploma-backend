@@ -13,7 +13,7 @@ async function bootstrap() {
     'http://localhost:19006',
   ];
   const corsOptions = {
-    origin: allowedDomains,
+    origin: true,
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
   };
