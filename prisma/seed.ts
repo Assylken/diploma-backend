@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const dataCountries = require('C:\\Users\\asylk\\Desktop\\muze-backend\\prisma\\countries.json');
-  const dataGenres = require('C:\\Users\\asylk\\Desktop\\muze-backend\\prisma\\genre.json');
+  const dataCountries = require('../prisma/countries.json');
+  const dataGenres = require('../prisma/genre.json');
   for (var i in dataCountries) {
     await prisma.country.upsert({
       create: {
