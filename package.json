@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "prisma": {
-    "seed": "ts-node dist/prisma/seed.js"
+    "seed": "ts-node dist/prisma/seed.ts"
   },
   "scripts": {
     "prisma:dev:deploy": "prisma migrate dev",
