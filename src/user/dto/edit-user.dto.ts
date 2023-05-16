@@ -23,3 +23,8 @@ export class EditUserImageDto {
   @IsOptional()
   profileImage?: string;
 }
+
+export class UserWalletAddress {
+  @IsOptional()
+  wallet_address: string;
+}

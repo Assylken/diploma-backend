@@ -1,6 +1,6 @@
 import { Injectable, Res } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { EditUserDto, EditUserImageDto } from './dto';
+import { EditUserDto, EditUserImageDto, UserWalletAddress } from './dto';
 
 @Injectable()
 export class UserService {
@@ -16,6 +16,19 @@ export class UserService {
         lastName: dto.lastName,
         bio: dto.bio,
         countryId: Number(dto.countryId),
+      },
+    });
+    delete user.hash;
+    return user;
+  }
+
+  async addWalletAddress(userId: number, dto: UserWalletAddress) {
+    const user = await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        wallet_address: dto.wallet_address,
       },
     });
     delete user.hash;

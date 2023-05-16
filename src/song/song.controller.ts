@@ -58,7 +58,7 @@ export class SongController {
     return this.songService.uploadSong(userId, dto, files);
   }
 
-  @UseGuards(JwtGuard)
+  //@UseGuards(JwtGuard)
   @Get('getAll')
   async getAllSongs() {
     return this.songService.getAllSongs();
