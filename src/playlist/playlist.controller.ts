@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -14,7 +15,12 @@ import { JwtGuard } from 'src/auth/guard';
 import { PlaylistService } from './playlist.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GetUser } from 'src/auth/decorator';
-import { AddSongToPlaylistDTO, PlaylistDTO } from './dto';
+import {
+  AddSongToPlaylistDTO,
+  DeletePlaylistDTO,
+  DeleteSongFromPlaylistDTO,
+  PlaylistDTO,
+} from './dto';
 import { diskStorage } from 'multer';
 import { Response } from 'express';
 
@@ -89,5 +95,17 @@ export class PlaylistController {
   @Get('getAllPlaylist')
   async getAllPlaylist() {
     return this.playlistService.getAllPlaylist();
+  }
+  @Get('getPlaylistNumber/:id')
+  async getPlaylistNumber(@Param('id') id: string) {
+    return this.playlistService.getPlaylistNumber(+id);
+  }
+  @Delete('deletePlaylist')
+  async deletePlaylist(@Body() dto: DeletePlaylistDTO) {
+    return this.playlistService.deletePlaylist(dto);
+  }
+  @Delete('deleteSongFromPlaylist')
+  async deleteSongFromPlaylist(@Body() dto: DeleteSongFromPlaylistDTO) {
+    return this.playlistService.deleteSongFromPlaylist(dto);
   }
 }

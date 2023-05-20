@@ -19,3 +19,15 @@ export class AddSongToPlaylistDTO {
   @IsNotEmpty()
   songId: number;
 }
+
+export class DeleteSongFromPlaylistDTO {
+  @IsNotEmpty()
+  playlistId: number;
+  @IsNotEmpty()
+  songId: number;
+}
+
+export class DeletePlaylistDTO {
+  @IsNotEmpty()
+  playlistId: number;
+}

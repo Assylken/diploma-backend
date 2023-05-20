@@ -6,3 +6,10 @@ export class UploadSongDto {
   @IsNotEmpty()
   genreId: number;
 }
+
+export class AddPlays {
+  @IsNotEmpty()
+  songId: number;
+  @IsNotEmpty()
+  plays: number;
+}

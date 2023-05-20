@@ -49,7 +49,7 @@ model Playlist {
 
 model PlaylistOnSong {
   id         Int      @default(autoincrement())
-  playlist   Playlist @relation(fields: [playlistId], references: [id])
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
   playlistId Int
   song       Song     @relation(fields: [songId], references: [id])
   songId     Int

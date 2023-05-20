@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Param,
+  Patch,
   Post,
   UploadedFiles,
   UseGuards,
@@ -10,7 +12,7 @@ import {
 import { SongService } from './song.service';
 import { GetUser } from 'src/auth/decorator';
 import { JwtGuard } from 'src/auth/guard';
-import { UploadSongDto } from './dto';
+import { AddPlays, UploadSongDto } from './dto';
 import {
   AnyFilesInterceptor,
   FileInterceptor,
@@ -68,5 +70,25 @@ export class SongController {
   @Get('getSong')
   async getSong(@GetUser('id') userId: number) {
     return this.songService.getSong(userId);
+  }
+
+  @Get('getSongsNumber/:id')
+  async getSongNumber(@Param('id') id) {
+    return this.songService.getSongsNumber(+id);
+  }
+
+  @Get('getSongsUser/:id')
+  async getSongsUser(@Param('id') id) {
+    return this.songService.getSongsUser(+id);
+  }
+
+  @Patch('addCurrentPlays')
+  async addCurrentPlays(@Body() dto: AddPlays) {
+    return this.songService.addCurrentPlays(dto);
+  }
+
+  @Patch('addTotalPlays/:id')
+  async addTotalPlays(@Param('id') id) {
+    return this.songService.addTotalPlays(+id);
   }
 }

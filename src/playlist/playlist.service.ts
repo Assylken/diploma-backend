@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { AddSongToPlaylistDTO, PlaylistDTO } from './dto';
+import { AddSongToPlaylistDTO, DeletePlaylistDTO, PlaylistDTO } from './dto';
 
 @Injectable()
 export class PlaylistService {
@@ -79,5 +79,39 @@ export class PlaylistService {
       },
     });
     return res;
+  }
+
+  async getPlaylistNumber(userId: number) {
+    const res = await this.prisma.playlist.aggregate({
+      where: {
+        userId: Number(userId),
+      },
+      _count: {
+        id: true,
+      },
+    });
+    return res;
+  }
+
+  async deletePlaylist(dto: DeletePlaylistDTO) {
+    const res = await this.prisma.playlist.delete({
+      where: {
+        id: Number(dto.playlistId),
+      },
+    });
+    if (res) return true;
+    return false;
+  }
+  async deleteSongFromPlaylist(dto: AddSongToPlaylistDTO) {
+    const deleteFromPlaylist = await this.prisma.playlistOnSong.delete({
+      where: {
+        playlistId_songId: {
+          playlistId: Number(dto.playlistId),
+          songId: Number(dto.songId),
+        },
+      },
+    });
+    if (deleteFromPlaylist) return true;
+    return false;
   }
 }
