@@ -33,7 +33,7 @@ export const storage = {
     },
   }),
   fileFilter: (req, file, cb) => {
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif|heic|)$/)) {
       return cb(null, false);
     }
     cb(null, true);
