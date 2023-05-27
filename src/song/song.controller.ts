@@ -77,6 +77,11 @@ export class SongController {
     return this.songService.getSongsNumber(+id);
   }
 
+  @Get('getPopularSongs')
+  async getPopularSongs() {
+    return this.songService.getPopularSongs();
+  }
+
   @Get('getSongsUser/:id')
   async getSongsUser(@Param('id') id) {
     return this.songService.getSongsUser(+id);

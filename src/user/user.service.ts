@@ -51,11 +51,26 @@ export class UserService {
     return user;
   }
 
-  getUsername(id: number) {
-    const user = this.prisma.user.findUnique({
-      where: {
-        id,
+  async getUsername(id: number) {
+    console.log('ADASD', id);
+    if (id) {
+      const user = this.prisma.user.findUnique({
+        where: {
+          id: Number(id),
+        },
+      });
+
+      return user;
+    }
+    return null;
+  }
+
+  async getTopArtists() {
+    const user = this.prisma.user.findMany({
+      orderBy: {
+        id: 'asc',
       },
+      take: 5,
     });
 
     return user;

@@ -64,9 +64,14 @@ export class UserController {
     return this.userService.addWalletAddress(userId, dto);
   }
 
-  @Get(':id')
+  @Get('getUsername/:id')
   getUsername(@Param('id') id) {
     return this.userService.getUsername(+id);
+  }
+
+  @Get('getTopArtists')
+  getTopArtists() {
+    return this.userService.getTopArtists();
   }
 
   @UseGuards(JwtGuard)

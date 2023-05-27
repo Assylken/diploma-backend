@@ -97,6 +97,16 @@ export class SongService {
     return songs;
   }
 
+  async getPopularSongs() {
+    const songs = await this.prisma.song.findMany({
+      orderBy: {
+        currentPlays: 'asc',
+      },
+      take: 4,
+    });
+    return songs;
+  }
+
   async getSong(userId: number) {
     const song = await this.prisma.song.findMany({
       where: {

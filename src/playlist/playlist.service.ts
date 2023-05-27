@@ -63,6 +63,7 @@ export class PlaylistService {
             name: true,
             song_cid: true,
             image_cid: true,
+            currentPlays: true,
             plays: true,
             genreId: true,
             userId: true,
