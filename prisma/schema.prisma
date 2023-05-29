@@ -64,7 +64,7 @@ model Song {
   song_cid       String
   image_cid      String
   plays          Int?
-  currentPlays   Int?
+  currentPlays   Float?
   level          Int?
   genre          Genre            @relation(fields: [genreId], references: [id])
   genreId        Int

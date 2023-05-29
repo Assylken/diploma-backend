@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Song" ALTER COLUMN "currentPlays" SET DATA TYPE DOUBLE PRECISION;
