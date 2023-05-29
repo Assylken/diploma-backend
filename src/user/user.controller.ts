@@ -15,7 +15,7 @@ import {
 import { User } from '@prisma/client';
 import { GetUser } from 'src/auth/decorator';
 import { JwtGuard } from 'src/auth/guard';
-import { EditUserDto, UserWalletAddress } from './dto';
+import { EditUserDto, UserSubcription, UserWalletAddress } from './dto';
 import { UserService } from './user.service';
 import { diskStorage } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -62,6 +62,11 @@ export class UserController {
     @Body() dto: UserWalletAddress,
   ) {
     return this.userService.addWalletAddress(userId, dto);
+  }
+
+  @Patch('UserSubcription')
+  UserSubcription(@Body() dto: UserSubcription) {
+    return this.userService.UserSubcription(dto);
   }
 
   @Get('getUsername/:id')

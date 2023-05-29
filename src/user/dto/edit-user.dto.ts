@@ -28,3 +28,10 @@ export class UserWalletAddress {
   @IsOptional()
   wallet_address: string;
 }
+
+export class UserSubcription {
+  @IsOptional()
+  id: number;
+  @IsOptional()
+  subscription: boolean;
+}
