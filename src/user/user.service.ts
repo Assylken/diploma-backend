@@ -88,6 +88,9 @@ export class UserService {
       orderBy: {
         id: 'asc',
       },
+      where: {
+        isArtist: true,
+      },
       take: 5,
     });
 
